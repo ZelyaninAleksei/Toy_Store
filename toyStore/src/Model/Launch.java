@@ -6,9 +6,9 @@
     import java.util.Random;
 
     public class Launch {
-        public static void launchRun(PriorityQueue<Toy> listToys) {
+        public static void launchRun(PriorityQueue<Toy> listToys) throws IOException {
+            FileWriter writer = new FileWriter("results.txt");
             try {
-                FileWriter writer = new FileWriter("results.txt");
                 Random random = new Random();
 
                 for (int i = 0; i < 10; i++) {
@@ -29,8 +29,7 @@
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            } finally {
-
             }
+            writer.close();
         }
     }

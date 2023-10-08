@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -9,7 +10,7 @@ import View.Menu;
 
 public class ControllerClass {
     
-    public static void runApp() {
+    public static void runApp() throws IOException {
         Menu menuGen = new Menu();
         PriorityQueue<Toy> listToys = new PriorityQueue<>(Comparator.comparingInt(Toy::getWeight));
         boolean appRun = true;
