@@ -1,7 +1,9 @@
 package Controller;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import Model.Launch;
 import Model.Toy;
 import View.Menu;
 
@@ -9,7 +11,7 @@ public class ControllerClass {
     
     public static void runApp() {
         Menu menuGen = new Menu();
-        PriorityQueue<Toy> listToys = new PriorityQueue<>((toy1, toy2) -> toy2.getWeight() - toy1.getWeight());
+        PriorityQueue<Toy> listToys = new PriorityQueue<>(Comparator.comparingInt(Toy::getWeight));
         boolean appRun = true;
         
         while(appRun)
@@ -18,7 +20,7 @@ public class ControllerClass {
         int userChoice = menuGen.Choice(5);
         switch (userChoice) {
             case 1:
-                
+                Launch.launchRun(listToys);
                 break;
             
             case 2:

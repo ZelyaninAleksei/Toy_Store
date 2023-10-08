@@ -3,7 +3,7 @@ package Model;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Toy {
+public class Toy implements Comparable {
     int id;
     String nameToy;
     int weight;
@@ -75,5 +75,10 @@ public class Toy {
     @Override
     public String toString(){
         return "\n ID: "+getId() + "\n Наименование: " + getNameToy() + "\n Вес: " + getWeight(); 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
