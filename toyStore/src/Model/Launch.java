@@ -2,60 +2,45 @@ package Model;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-/**
- * Класс содержащий метод,
- * выполняющий основную логику розыгрыша.
- */
 public class Launch {
-    /**
-     * @param listToys - список игрушек
-     * @throws IOException - обработка ошибки и вывод трассировки стека ошибки.
-     */
     public static void launchRun(PriorityQueue<Toy> listToys) throws IOException {
-        FileWriter writer = new FileWriter("results.txt",  true);
+        FileWriter writer = new FileWriter("results.txt", true);
         try {
-            Random random = new Random();
+            Random random = new Random(11);
+            int randomValue = random.nextInt();
 
-            for (int i = 0; i < 10; i++) {
-                int randomValue = random.nextInt(10); // Генерируем случайное число от 0 до 9
-
-                Toy selectedToy;
-                if (randomValue < 2) { // 20% вероятность
-                    selectedToy = selectToyWithWeight(listToys, 2);
-                } else if (randomValue < 4) { // 20% вероятность
-                    selectedToy = selectToyWithWeight(listToys, 3);
-                } else { // 60% вероятность
-                    selectedToy = selectToyWithWeight(listToys, 1);
-                }
-
-                if (selectedToy != null) {
-                    writer.write("Get: " + selectedToy.id + " - " + selectedToy.getNameToy() + "\n");
-                    listToys.add(selectedToy); // Помещаем игрушку обратно в очередь
+            Iterator<Toy> iterator = listToys.iterator();
+            while (iterator.hasNext()) {
+                Toy toy = iterator.next();
+                int quant = toy.getQuantity() - 1;
+                int weightToy = toy.getWeight();
+                if (randomValue <= 2 && weightToy <= 2) {
+                    System.out.println("Розыгрыш проведён. \n" + "результат:" + toy.getNameToy());
+                    writer.write("Идентификатор игрушки: " + toy.getId() + " - " + toy.getNameToy() + " Остаток: " + quant + "\n");
+                    toy.setQuantity(quant);
+                    if (quant == 0) iterator.remove();
+                    break;
+                } else if ((randomValue > 2 && randomValue <= 4) && (weightToy > 2 && weightToy <= 4)) {
+                    System.out.println("Розыгрыш проведён. \n" + "результат:" + toy.getNameToy());
+                    writer.write("Идентификатор игрушки: " + toy.getId() + " - " + toy.getNameToy() + " Остаток: " + quant + "\n");
+                    toy.setQuantity(quant);
+                    if (quant == 0) iterator.remove();
+                    break;
+                } else {
+                    System.out.println("Розыгрыш проведён. \n" + "результат:" + toy.getNameToy());
+                    writer.write("Идентификатор игрушки: " + toy.getId() + " - " + toy.getNameToy() + " Остаток: " + quant + "\n");
+                    toy.setQuantity(quant);
+                    if (quant == 0) iterator.remove();
+                    break;
                 }
             }
+        } catch (Exception ignored) {
 
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
-
-    /**
-     * @param toyQueue - очередь игрушек
-     * @param weight   - вес (частота выпадения) игрушки
-     * @return - возвращает toy если игрушка с указанным весом есть в очереди,
-     * возвращает null - для обозначения того, что игрушка с таким весом не была найдена.
-     */
-    private static Toy selectToyWithWeight(PriorityQueue<Toy> toyQueue, int weight) {
-        for (Toy toy : toyQueue) {
-            if (toy.weight == weight) {
-                toyQueue.remove(toy);
-                return toy;
-            }
-        }
-        return null;
+        writer.close();
     }
 }
