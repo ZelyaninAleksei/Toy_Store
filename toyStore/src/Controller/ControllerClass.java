@@ -32,9 +32,7 @@ public class ControllerClass {
                     }
                     break;
                 case 4:
-                    for (int i = 0; i < 10; i++) {
-                        Launch.launchRun(listToys);
-                    }
+                    Toy.changeWeight(Toy.choosingToy(listToys));
                     break;
                 case 5:
                     appRun = false;

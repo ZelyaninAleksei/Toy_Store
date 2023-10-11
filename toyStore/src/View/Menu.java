@@ -9,11 +9,11 @@ public class Menu {
     {
         System.out.println("Приложение 'Магазин игрушек'");
         System.out.println("Меню:");
-        System.out.println("1. Запуск 1 раз");
-        System.out.println("2. Добавление игрушки ");
-        System.out.println("3. Просмотр игрушек ");
-        System.out.println("4. Запуск 10 раз");
-        System.out.println("5. Выход ");
+        System.out.println("1. Запустить розыгрыш");
+        System.out.println("2. Добавить игрушку ");
+        System.out.println("3. Просмотреть очередь ");
+        System.out.println("4. Изменить вес игрушки");
+        System.out.println("5. Выйти ");
         System.out.println("Введите номер пункта: ");
     }
 
